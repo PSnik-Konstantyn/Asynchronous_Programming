@@ -12,7 +12,7 @@ public class Admin implements Runnable {
         try {
             for (int i = 1; i <= 5; i++) {
                 store.addProduct(new Product("Товар " + i));
-                Thread.sleep(1000); // Затримка між додаванням товарів
+                Thread.sleep(100);
             }
         } catch (InterruptedException e) {
             System.out.println("Помилка в роботі адміністратора.");
