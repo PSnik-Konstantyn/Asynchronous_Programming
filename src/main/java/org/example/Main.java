@@ -42,8 +42,7 @@ public class Main {
 
         System.err.println("Покупець 4 намагається купити товар...");
         customer4.start();
-        System.err.println("Покупець 5 намагається купити товар...");
-        customer5.start();
+
 
         try {
             Thread.sleep(10000);
@@ -51,5 +50,8 @@ public class Main {
         } catch (InterruptedException e) {
             System.out.println("Помилка під час очікування.");
         }
+
+        System.err.println("Покупець 5 намагається купити товар...");
+        customer5.start();
     }
 }

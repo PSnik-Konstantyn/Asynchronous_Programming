@@ -24,7 +24,11 @@ public class Store {
 
     public synchronized void buyProduct(String productName) {
         try {
-            System.out.println("Покупець чекає на товар: " + productName);
+            if (!isOpen) {
+                System.out.println("Магазин зачинений, купівля неможлива.");
+                return;
+            }
+
             semaphore.acquire();
 
             Product productToBuy = null;
@@ -37,9 +41,9 @@ public class Store {
 
             if (productToBuy != null) {
                 products.remove(productToBuy);
-                System.out.println("Покупець купив товар: " + productToBuy.getName());
+                System.out.println("Покупець купив: " + productToBuy.getName());
             } else {
-                System.out.println("Товар " + productName + " відсутній в магазині.");
+                System.out.println(productName + " відсутній в магазині.");
             }
 
         } catch (InterruptedException e) {
