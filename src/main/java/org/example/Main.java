@@ -13,7 +13,7 @@ public class Main {
         Customer customer2 = new Customer(store, "Ноутбук", "Покупець 2");
         Customer customer3 = new Customer(store, "Телевізор", "Покупець 3");
         Customer customer4 = new Customer(store, "Телефон", "Покупець 4");
-        Customer customer5 = new Customer(store, "Телефон", "Покупець 4");
+        Customer customer5 = new Customer(store, "Телефон", "Покупець 5");
 
         Thread customerThread1 = new Thread(customer1);
         Thread customerThread2 = new Thread(customer2);
