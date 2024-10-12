@@ -7,15 +7,25 @@ public class Admin implements Runnable {
         this.store = store;
     }
 
-    @Override
     public void run() {
         try {
-            for (int i = 1; i <= 5; i++) {
-                store.addProduct(new Product("Товар " + i));
-                Thread.sleep(100);
-            }
+            // Додавання кількох товарів адміністратором
+            store.addProduct(new Product("Телефон", 1));
+            Thread.sleep(1000);
+            store.addProduct(new Product("Ноутбук", 1));
+            Thread.sleep(1000);
+            store.addProduct(new Product("Епл вотч", 2));
         } catch (InterruptedException e) {
-            System.out.println("Помилка в роботі адміністратора.");
+            System.out.println("Адміністратор не зміг додати товари через помилку.");
+        }
+
+        // Через деякий час магазин зачиняється
+        try {
+            System.err.println("Магазин відкрився.");
+            Thread.sleep(9000); // Магазин працює 5 секунд
+            store.closeStore();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }

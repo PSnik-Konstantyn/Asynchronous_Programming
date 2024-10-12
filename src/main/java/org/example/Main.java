@@ -2,56 +2,45 @@ package org.example;
 
 public class Main {
     public static void main(String[] args) {
-        Store store = new Store(2);
+        Store store = new Store(2); // Максимально 2 покупці одночасно
 
-        Thread admin = new Thread(new Admin(store));
-        Thread customer1 = new Thread(new Customer(store, "Товар 1"));
-        Thread customer2 = new Thread(new Customer(store, "Товар 2"));
-        Thread customer3 = new Thread(new Customer(store, "Товар 6"));
-        Thread customer4 = new Thread(new Customer(store, "Товар 3"));
-        Thread customer5 = new Thread(new Customer(store, "Товар 3"));
+        // Створюємо потік для адміністратора
+        Admin admin = new Admin(store);
+        Thread adminThread = new Thread(admin);
 
-        admin.start();
+        // Створюємо покупців
+        Customer customer1 = new Customer(store, "Телефон", "Покупець 1");
+        Customer customer2 = new Customer(store, "Ноутбук", "Покупець 2");
+        Customer customer3 = new Customer(store, "Телевізор", "Покупець 3");
+        Customer customer4 = new Customer(store, "Телефон", "Покупець 4");
+        Customer customer5 = new Customer(store, "Телефон", "Покупець 4");
 
+        Thread customerThread1 = new Thread(customer1);
+        Thread customerThread2 = new Thread(customer2);
+        Thread customerThread3 = new Thread(customer3);
+        Thread customerThread4 = new Thread(customer4);
+        Thread customerThread5 = new Thread(customer5);
+
+        // Запуск потоку адміністратора
+        adminThread.start();
         try {
-            Thread.sleep(1000);
+            Thread.sleep(2000); // Чекаємо, поки адмін додасть товари
         } catch (InterruptedException e) {
-            System.out.println("Помилка під час очікування.");
+            e.printStackTrace();
         }
 
-        System.err.println("Покупець 1 намагається купити товар...");
-        customer1.start();
+        // Запуск потоків покупців
+        customerThread1.start();
+
+        customerThread3.start();
+        customerThread2.start();
+        customerThread4.start(); // Намагається купити товар, що закінчився
 
         try {
-            Thread.sleep(3000);
+            Thread.sleep(5000); // Переконуємося, що магазин закрився
         } catch (InterruptedException e) {
-            System.out.println("Помилка під час очікування.");
+            e.printStackTrace();
         }
-
-        System.err.println("Покупець 2 намагається купити товар...");
-        customer2.start();
-
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            System.out.println("Помилка під час очікування.");
-        }
-
-        System.err.println("Покупець 3 намагається купити товар...");
-        customer3.start();
-
-        System.err.println("Покупець 4 намагається купити товар...");
-        customer4.start();
-
-
-        try {
-            Thread.sleep(10000);
-            store.closeStore();
-        } catch (InterruptedException e) {
-            System.out.println("Помилка під час очікування.");
-        }
-
-        System.err.println("Покупець 5 намагається купити товар...");
-        customer5.start();
+        customerThread5.start();
     }
 }
