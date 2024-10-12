@@ -31,10 +31,10 @@ public class Main {
 
         // Запуск потоків покупців
         customerThread1.start();
-
+        customerThread4.start(); // Намагається купити товар, що закінчився
         customerThread3.start();
         customerThread2.start();
-        customerThread4.start(); // Намагається купити товар, що закінчився
+
 
         try {
             Thread.sleep(5000); // Переконуємося, що магазин закрився
