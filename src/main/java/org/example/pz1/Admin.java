@@ -1,4 +1,4 @@
-package org.example;
+package org.example.pz1;
 
 public class Admin implements Runnable {
     private Store store;

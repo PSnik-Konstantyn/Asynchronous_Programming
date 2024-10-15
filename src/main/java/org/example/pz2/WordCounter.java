@@ -6,7 +6,7 @@ import java.util.*;
 public class WordCounter {
 
     public static void main(String[] args) throws InterruptedException {
-        String text = "Тут тут багато тексту | тексту тексту ага угук угук";
+        String text = "Тут тут багато тексту тексту тексту ага угук угук";
 
         ConcurrentHashMap<String, Integer> wordCounts = new ConcurrentHashMap<>();
 
@@ -31,7 +31,7 @@ public class WordCounter {
 
         for (Future<Void> future : futures) {
             while (!future.isDone()) {
-                Thread.sleep(2000);
+                Thread.sleep(1);
                 System.out.println("Завдання ще виконується...");
             }
         }

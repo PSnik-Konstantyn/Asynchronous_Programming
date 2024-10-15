@@ -1,4 +1,4 @@
-package org.example;
+package org.example.pz1;
 
 public class Product {
     private String name;
@@ -13,7 +13,6 @@ public class Product {
         return name;
     }
 
-    // Синхронізований метод для покупки товару
     public synchronized boolean purchase() {
         if (quantity > 0) {
             quantity--;
@@ -22,12 +21,4 @@ public class Product {
         return false;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    // Метод для додавання товару на склад
-    public void restock(int amount) {
-        quantity += amount;
-    }
 }
