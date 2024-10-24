@@ -13,6 +13,5 @@ public class Customer implements Runnable {
 
     public void run() {
         store.buyProduct(productName, customerName);
-
     }
 }

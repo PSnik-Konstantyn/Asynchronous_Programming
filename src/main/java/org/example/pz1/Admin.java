@@ -9,7 +9,7 @@ public class Admin implements Runnable {
 
     public void run() {
         try {
-            // Додавання кількох товарів адміністратором
+            // Додавання кількох товарів
             store.addProduct(new Product("Телефон", 1));
             Thread.sleep(1000);
             store.addProduct(new Product("Ноутбук", 1));
@@ -22,7 +22,7 @@ public class Admin implements Runnable {
         // Через деякий час магазин зачиняється
         try {
             System.err.println("Магазин відкрився.");
-            Thread.sleep(9000); // Магазин працює 5 секунд
+            Thread.sleep(9000); // Магазин працює 9 секунд
             store.closeStore();
         } catch (InterruptedException e) {
             e.printStackTrace();

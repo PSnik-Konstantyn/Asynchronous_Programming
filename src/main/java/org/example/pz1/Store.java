@@ -14,7 +14,7 @@ public class Store {
     }
 
     // Метод для додавання товару адміністратором
-    public synchronized void addProduct(Product product) {
+    public void addProduct(Product product) {
         products.add(product);
         System.out.println("Адміністратор додав товар: " + product.getName());
     }
