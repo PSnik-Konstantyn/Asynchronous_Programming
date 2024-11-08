@@ -1,4 +1,4 @@
-package org.example.pz2;
+package org.example.task2;
 
 import java.util.concurrent.*;
 import java.util.*;
