@@ -29,7 +29,8 @@ public class ArrayProcessing {
         long startTime = System.currentTimeMillis();
         System.err.println("Початок обчислення");
 
-        List<Integer> resultList = new ArrayList<>();
+        // Розбиття масиву на частини та обробка в асинхронному режимі
+        CopyOnWriteArrayList<Integer> resultList = new CopyOnWriteArrayList<>();
         List<Future<List<Integer>>> futures = new ArrayList<>();
         ExecutorService executorService = Executors.newFixedThreadPool(4);
 
@@ -47,14 +48,14 @@ public class ArrayProcessing {
         // Отримання результатів обробки та перевірка стану завдань
         for (Future<List<Integer>> future : futures) {
             try {
-                // Перевірка, чи підзавдання завершено
                 if (future.isDone()) {
-                    // Отримання результату та додавання до resultList
-                    resultList.addAll(future.get());
+                    System.out.println("Завдання завершено");
+                } else {
+                    System.out.println("Завдання ще виконується");
                 }
 
+                // Отримання результату, якщо завдання не скасовано
                 if (!future.isCancelled()) {
-                    // Додаємо що є
                     resultList.addAll(future.get());
                 }
             } catch (InterruptedException | ExecutionException e) {
