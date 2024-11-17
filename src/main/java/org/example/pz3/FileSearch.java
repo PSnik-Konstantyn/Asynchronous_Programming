@@ -14,7 +14,7 @@ public class FileSearch {
         System.out.println("Enter the directory path:");
         String dirPath = scanner.nextLine();
 
-        System.out.println("Enter the file extension to search (e.g., .pdf):");
+        System.out.println("Enter the file extension to search (.pdf):");
         String extension = scanner.nextLine();
 
         File rootDir = new File(dirPath);

@@ -28,7 +28,7 @@ public class PairSumWorkDealing {
         System.out.println("Generated array of size " + n + " with values between " + minValue + " and " + maxValue);
         System.out.println(Arrays.toString(array));
 
-        int numThreads = 4;
+        int numThreads = Runtime.getRuntime().availableProcessors();
         ExecutorService executor = Executors.newFixedThreadPool(numThreads);
 
         List<Future<Long>> results = new ArrayList<>();
