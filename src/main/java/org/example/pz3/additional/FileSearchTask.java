@@ -1,4 +1,4 @@
-package org.example.pz3;
+package org.example.pz3.additional;
 
 import java.io.File;
 import java.util.concurrent.RecursiveTask;

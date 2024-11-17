@@ -1,11 +1,11 @@
-package org.example.pz3;
+package org.example.pz3.additional;
 
 import java.util.concurrent.RecursiveTask;
 
 public class PairSumTask extends RecursiveTask<Long> {
     private final int[] array;
     private final int start, end;
-    private static final int THRESHOLD = 1000;
+    private static final int THRESHOLD = 100;
 
     public PairSumTask(int[] array, int start, int end) {
         this.array = array;

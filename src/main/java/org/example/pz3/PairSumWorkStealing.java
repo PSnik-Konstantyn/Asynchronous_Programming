@@ -1,8 +1,9 @@
 package org.example.pz3;
 
+import org.example.pz3.additional.PairSumTask;
+
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.concurrent.RecursiveTask;
 import java.util.concurrent.ForkJoinPool;
 
 public class PairSumWorkStealing {
@@ -24,13 +25,15 @@ public class PairSumWorkStealing {
         System.out.println("Generated array of size " + n + " with values between " + minValue + " and " + maxValue);
         System.out.println(Arrays.toString(array));
 
-        ForkJoinPool pool = new ForkJoinPool();
         long startTime = System.currentTimeMillis();
-        long result = pool.invoke(new PairSumTask(array, 0, array.length));
-        long endTime = System.currentTimeMillis();
 
-        System.out.println("Result: " + result);
-        System.out.println("Time Work Stealing: " + (endTime - startTime) + "ms");
+        try (ForkJoinPool pool = new ForkJoinPool()) {
+            long result = pool.invoke(new PairSumTask(array, 0, array.length));
+            long endTime = System.currentTimeMillis();
+
+            System.out.println("Result: " + result);
+            System.out.println("Time Work Stealing: " + (endTime - startTime) + "ms");
+        }
+
     }
-
 }

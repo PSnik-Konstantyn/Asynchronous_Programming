@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class PairSumWorkDealing {
 
     public static void main(String[] args) throws Exception {
-        System.err.println("work dealing");
+        System.err.println("Work dealing");
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter the size of the array:");
@@ -28,7 +28,7 @@ public class PairSumWorkDealing {
         System.out.println("Generated array of size " + n + " with values between " + minValue + " and " + maxValue);
         System.out.println(Arrays.toString(array));
 
-        int numThreads = Runtime.getRuntime().availableProcessors();
+        int numThreads = 4;
         ExecutorService executor = Executors.newFixedThreadPool(numThreads);
 
         List<Future<Long>> results = new ArrayList<>();
@@ -42,7 +42,7 @@ public class PairSumWorkDealing {
 
             results.add(executor.submit(() -> {
                 long sum = 0;
-                for (int j = start; j < end - 1; j++) {
+                for (int j = start; j < Math.min(end, array.length - 1); j++) {
                     sum += array[j] + array[j + 1];
                 }
                 return sum;
