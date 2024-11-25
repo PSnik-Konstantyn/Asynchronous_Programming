@@ -11,7 +11,9 @@ public class ArrayProcessing {
     public static void main(String[] args) {
         int lowerBound = -100;
         int upperBound = 100;
-        int arraySize = 60;
+        int arraySize = 0 ;
+        Scanner input = new Scanner(System.in);
+        arraySize = input.nextInt();
 
         // Генерація масиву випадкових чисел
         int[] array = generateRandomArray(arraySize, lowerBound, upperBound);
