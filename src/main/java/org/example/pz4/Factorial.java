@@ -1,5 +1,6 @@
 package org.example.pz4;
 
+import java.math.BigInteger;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
@@ -27,11 +28,11 @@ public class Factorial {
             return incrementedArray;
         });
 
-        CompletableFuture<Long> factorialFuture = incrementedArrayFuture.thenCombineAsync(arrayFuture, (incrementedArray, originalArray) -> {
+        CompletableFuture<BigInteger> factorialFuture = incrementedArrayFuture.thenCombineAsync(arrayFuture, (incrementedArray, originalArray) -> {
             long start = System.currentTimeMillis();
             int sum1 = IntStream.of(incrementedArray).sum();
             int sum2 = IntStream.of(originalArray).sum();
-            long factorial = calculateFactorial(sum1 + sum2);
+            BigInteger factorial = calculateFactorial(sum1 + sum2);
             printTime("Factorial calculation", start);
             return factorial;
         });
@@ -66,10 +67,10 @@ public class Factorial {
         }
     }
 
-    private static long calculateFactorial(int number) {
-        long result = 1;
+    private static BigInteger calculateFactorial(int number) {
+        BigInteger result = BigInteger.ONE;
         for (int i = 2; i <= number; i++) {
-            result *= i;
+            result = result.multiply(BigInteger.valueOf(i));
         }
         return result;
     }
