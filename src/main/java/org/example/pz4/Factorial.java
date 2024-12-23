@@ -28,10 +28,10 @@ public class Factorial {
             return incrementedArray;
         });
 
-        CompletableFuture<BigInteger> factorialFuture = incrementedArrayFuture.thenCombineAsync(arrayFuture, (incrementedArray, originalArray) -> {
+        CompletableFuture<BigInteger> factorialFuture = incrementedArrayFuture.thenCombineAsync(arrayFuture, (incrementedArray, array) -> {
             long start = System.currentTimeMillis();
             int sum1 = IntStream.of(incrementedArray).sum();
-            int sum2 = IntStream.of(originalArray).sum();
+            int sum2 = IntStream.of(array).sum();
             BigInteger factorial = calculateFactorial(sum1 + sum2);
             printTime("Factorial calculation", start);
             return factorial;
