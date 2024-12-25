@@ -18,8 +18,12 @@ public class BestRoute {
                 checkOption("Літак", 2, 200)
         );
 
-        CompletableFuture<Route> bestTrainOrBus = trainOption.thenCombine(busOption, BestRoute::compareRoutes);
-        CompletableFuture<Route> bestOverall = bestTrainOrBus.thenCombine(flightOption, BestRoute::compareRoutes);
+        CompletableFuture<Route> bestTrainOrBus = trainOption.thenCombine(busOption,
+                (r1, r2) -> BestRoute.compareRoutes(r1, r2));
+
+        CompletableFuture<Route> bestOverall = bestTrainOrBus.thenCombine(flightOption,
+                (r1, r2) -> BestRoute.compareRoutes(r1, r2));
+
 
         CompletableFuture<Void> allChecks = CompletableFuture.allOf(trainOption, busOption, flightOption);
 
@@ -40,7 +44,7 @@ public class BestRoute {
             System.out.println("Огляд всіх варіантів:\n" + summary.get());
             System.out.println("Перший доступний результат: " + firstResult.get());
         } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
+            System.out.println("Упс! Помилка");
         }
     }
 
@@ -50,6 +54,7 @@ public class BestRoute {
     }
 
     private static Route compareRoutes(Route r1, Route r2) {
+        // fix the logic
         double r1Score = r1.durationHours * 0.7 + r1.cost * 0.3;
         double r2Score = r2.durationHours * 0.7 + r2.cost * 0.3;
         return r1Score < r2Score ? r1 : r2;
