@@ -11,7 +11,7 @@ public class DifferentSources {
         });
 
         CompletableFuture<String> sourceB = CompletableFuture.supplyAsync(() -> {
-            simulateDelay(1500);
+            simulateDelay(2500);
             return "Дані з джерела B";
         });
 
