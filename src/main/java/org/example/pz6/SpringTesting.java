@@ -21,7 +21,7 @@ public class SpringTesting implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         CompletableFuture<Void> task1 = incrementCounter();
         CompletableFuture<Void> task2 = printTime();
         CompletableFuture.allOf(task1, task2).join();
