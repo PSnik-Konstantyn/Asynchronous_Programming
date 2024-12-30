@@ -3,6 +3,8 @@ package org.example.pz6;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -14,13 +16,19 @@ import java.util.concurrent.TimeUnit;
 
 @SpringBootApplication
 @EnableScheduling
-public class AsyncScheduledApplication {
+public class AsyncScheduledApplication implements ApplicationContextAware {
 
     private volatile int counter = 0;
     private final Object lock = new Object();
+    private ApplicationContext applicationContext;
 
     public static void main(String[] args) {
         SpringApplication.run(AsyncScheduledApplication.class, args);
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
     }
 
     @Bean
@@ -35,6 +43,7 @@ public class AsyncScheduledApplication {
                         if (counter == 10) {
                             System.out.println("Лічильник досяг 10. Зупинка...");
                             executorService.shutdown();
+                            shutdownApplication();
                         }
                     }
                 }
@@ -49,5 +58,10 @@ public class AsyncScheduledApplication {
                 System.out.println("Час: " + LocalTime.now());
             }
         }
+    }
+
+    private void shutdownApplication() {
+        SpringApplication.exit(applicationContext, () -> 0);
+        System.exit(0);
     }
 }
